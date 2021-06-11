@@ -7,7 +7,7 @@ public class HashUtil {
 		String salt=BCrypt.gensalt();
 		return BCrypt.hashpw(plain, salt);
 	}
-	public static boolean veryfy(String plain,String hash) {
+	public static boolean verify(String plain,String hash) {
 		return BCrypt.checkpw(plain, hash);
 	}
 }

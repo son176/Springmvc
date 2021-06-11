@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.swing.text.html.FormSubmitEvent.MethodType;
 import javax.validation.Valid;
 
@@ -109,7 +110,15 @@ public class UserControler {
 			entity.setPassword(hashpassword);
 			this.uploadutil.handUploadFile(uploadFile);
 			entity.setPhoto(uploadFile.getOriginalFilename());
-			this.userRepo.save(entity);
+			User find =this.userRepo.findByEmail(entity.getEmail());//check email
+			HttpSession session = request.getSession();
+			if(find==null) {
+				this.userRepo.save(entity);
+			}else {
+				session.setAttribute("error", "email không được trùng");
+				return "admin/users/create";
+			}
+			
 			return "redirect:/admin/users";
 		}
 		

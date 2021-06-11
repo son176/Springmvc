@@ -40,7 +40,7 @@
 			</div>
 			<div class="form-group mt-3">
 				<label for="email">Email</label>
-			    <form:input path="email" class="form-control" id="email" name="email" autocomplete="off" />
+			    <form:input path="email" class="form-control" id="email" name="email" autocomplete="off" readonly="true" />
 			     <form:errors path="email" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
