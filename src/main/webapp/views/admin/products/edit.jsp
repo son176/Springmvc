@@ -57,9 +57,7 @@
 				 <form:errors path="admin" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
-				<label for="photo">Image</label> <br>
-				<img alt="" src="${ pageContext.request.contextPath }/storage/${user.photo}" width="100px"><br>
-				<label for="photo">Create or Update </label> <br>
+				<label for="photo">Image</label>
 			    <input type="file" class="form-control"  name="upload_file">
 			</div>
 			<div class="form-group mt-3">

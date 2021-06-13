@@ -56,17 +56,7 @@
 		</form>
 	</div>
 
-
-
 	<div class="mt-5 col-10 offset-1 border border-primary p-2">
-		<c:if test="${ not empty sessionScope.sucessfully }">
-			<div class="text-success text-center">${ sessionScope.sucessfully }</div>
-			<c:remove var="sucessfully" scope="session" />
-		</c:if>
-		<c:if test="${ not empty sessionScope.status }">
-			<div class="text-danger text-center">${ sessionScope.status }</div>
-			<c:remove var="status" scope="session" />
-		</c:if>
 		<div class="">
 			<a class="btn btn-success col-1"
 				href="${ pageContext.request.contextPath }/admin/users/create">Create</a>
@@ -110,9 +100,8 @@
 			<ul class="pagination">
 				<c:forEach begin="0" end="${ pageData.totalPages - 1 }"
 					varStatus="page">
-					<li class="page-item"><a
-						href="${ pageContext.request.contextPath }/admin/users/?page=${page.index}"
-						class="page-link">${ page.index + 1 } </a></li>
+					<li class="page-item"><a href="${ pageContext.request.contextPath }/admin/users/?page=${page.index}"  class="page-link">${ page.index + 1 } </a>
+					</li>
 				</c:forEach>
 			</ul>
 		</div>

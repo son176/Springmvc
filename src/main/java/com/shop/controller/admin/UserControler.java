@@ -1,5 +1,6 @@
 package com.shop.controller.admin;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -37,16 +38,13 @@ import com.shop.utils.HashUtil;
 import com.shop.utils.UploadFile;
 
 
-
-
-
-
-
 @Controller
 @RequestMapping(value="/admin/users")
 public class UserControler {
 	@Autowired
 	private HttpServletRequest request;
+	@Autowired
+	private HttpSession session;
 	@Autowired //khởi tạo
 	private UserRepositori userRepo;
 	@Autowired
@@ -67,7 +65,7 @@ public class UserControler {
 			Sort.by(Direction.ASC, sortField):
 			Sort.by(Direction.DESC, sortField);
 		int page = pageParam == null ? 0 : Integer.parseInt(pageParam);
-		int limit = limitParam == null ? 2 : Integer.parseInt(limitParam);
+		int limit = limitParam == null ? 10 : Integer.parseInt(limitParam);
 		Pageable pageable = PageRequest.of(page, limit, sort);
 		Page pageData = this.userRepo.findAll(pageable);
 		model.addAttribute("pageData", pageData);
@@ -99,20 +97,20 @@ public class UserControler {
 			BindingResult result,
 			@RequestParam("upload_file") MultipartFile uploadFile
 			)
-	{
+	{  
 		if(result.hasErrors()) {
-			System.out.println(result);
 			model.addAttribute("errors", result.getAllErrors());
 			return "admin/users/create";
 		}else {
 			User entity = this.mapper.convertToEntity(user);
 			String hashpassword =HashUtil.hash(entity.getPassword());
 			entity.setPassword(hashpassword);
-			this.uploadutil.handUploadFile(uploadFile);
-			entity.setPhoto(uploadFile.getOriginalFilename());
+			File file=uploadutil.handUploadFile(uploadFile);
+			entity.setPhoto(file.getName());
 			User find =this.userRepo.findByEmail(entity.getEmail());//check email
-			HttpSession session = request.getSession();
+			session = request.getSession();
 			if(find==null) {
+				session.setAttribute("sucessfully", "Thêm thành công");
 				this.userRepo.save(entity);
 			}else {
 				session.setAttribute("error", "email không được trùng");
@@ -144,8 +142,10 @@ public class UserControler {
 			return "admin/users/edit";
 		}else {
 			User entity =this.mapper.convertToEntity(user);
-			this.uploadutil.handUploadFile(uploadFile);
-			entity.setPhoto(uploadFile.getOriginalFilename());
+			User paw =this.userRepo.getById(entity.getId());
+		    entity.setPassword(paw.getPassword());
+			File file=uploadutil.handUploadFile(uploadFile);
+			entity.setPhoto(file.getName());
 			this.userRepo.save(entity);
 			return "redirect:/admin/users";
 		}
@@ -155,6 +155,8 @@ public class UserControler {
 	@PostMapping(value="/delete/{id}")
 	public String delete(@PathVariable("id") Integer id)
 	{
+		session = request.getSession();
+		session.setAttribute("status", "xóa thành công");
 		this.userRepo.deleteById(id);
 		return "redirect:/admin/users";
 	}
