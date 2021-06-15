@@ -1,38 +1,21 @@
 package com.shop.dto;
 
-import java.util.Date;
 
-
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import com.shop.entity.Category;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDTO {
+public class CategoryDTO {
 	private Integer id;
+	@NotNull
 	@NotBlank
 	private String name;
-	@NotBlank
-	private String image;
-	@NotNull
-	@Min(0)
-	private Integer price;
-
-	private Date create_date;
-	
-	private Integer avaliable;
-
-	private Category category;
 }

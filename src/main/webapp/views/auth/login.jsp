@@ -41,10 +41,10 @@
 
 
 						<div class="form-check">
-							<label class="form-check-label"> <input type="checkbox"
+							<label class="form-check-label"> <input type="checkbox" name="remember"
 								class="form-check-input"> <small>Remember Me</small>
 							</label>
-							<button type="submit" class="btn btn-login float-right">Submit</button>
+							<button type="submit" class="btn btn-login btn-danger float-right">Submit</button>
 						</div>
 
 					</form>

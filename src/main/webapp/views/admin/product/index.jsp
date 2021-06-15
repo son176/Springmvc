@@ -12,16 +12,15 @@
 <body>
 	<div class="col-10 offset-1 mt-5 border border-primary p-2">
 		<form method="GET"
-			action="${ pageContext.request.contextPath }/admin/users">
+			action="${ pageContext.request.contextPath }/admin/product">
 			<div class="row col-12 mt-2">
 				<div class="col-6">
 					<label>Sắp xếp theo</label> <select name="sort_by"
 						class="form-control">
 						<option value="id">Mặc định</option>
-						<option value="username">Họ Tên</option>
-						<option value="email">Email</option>
-						<option value="admin">Tài khoản</option>
-						<option value="activated">Trạng thái</option>
+						<option value="name">Tên</option>
+						<option value="createDate">Email</option>
+						<option value="avaiable">Trạng thái</option>
 					</select>
 				</div>
 				<div class="col-6">
@@ -35,7 +34,7 @@
 
 			<div>
 				<button class="btn btn-primary mt-4">Lọc</button>
-				<a href="${ pageContext.request.contextPath }/admin/users"
+				<a href="${ pageContext.request.contextPath }/admin/products"
 					class="btn btn-danger mt-4" type="reset"> Reset </a>
 			</div>
 		</form>
@@ -54,34 +53,36 @@
 		</c:if>
 		<div class="">
 			<a class="btn btn-success col-1"
-				href="${ pageContext.request.contextPath }/admin/users/create">Create</a>
+				href="${ pageContext.request.contextPath }/admin/product/create">Create</a>
 		</div>
 		<table class="table table-strip table-dark mt-3">
 			<thead>
 				<tr>
 					<td>Id</td>
-					<td>Username</td>
-					<td>Email</td>
-					<td>Tài khoản</td>
-					<td>Trạng thái</td>
+					<td>Name</td>
+					<td>Image</td>
+					<td>Create Date</td>
+					<td>Avaiable</td>
+					<td>Category</td>
 					<td colspan="2">Thao tác</td>
 				</tr>
 			</thead>
 
 			<tbody>
-				<c:forEach items="${ pageData.content }" var="user">
+				<c:forEach items="${ pageData.content }" var="product">
 					<tr>
-						<td>${ user.id }</td>
-						<td>${ user.username }</td>
-						<td>${ user.email }</td>
-						<td>${ user.admin == 1 ? "Admin" : "User" }</td>
-						<td>${ user.activated == 1 ? "Đang hoạt động" : "Vô hiệu hóa" }</td>
+						<td>${ product.id }</td>
+						<td>${ product.name }</td>
+						<td>${ product.image }</td>
+						<td>${ product.create_date}</td>
+						<td>${ product.avaliable == 1 ? "Đang hoạt động" : "Vô hiệu hóa" }</td>
+						<td>${ product.category.name}</td>
 						<td><a class="btn btn-primary"
-							href="${ pageContext.request.contextPath }/admin/users/edit/${user.id}">Update</a>
+							href="${ pageContext.request.contextPath }/admin/product/edit/${product.id}">Update</a>
 						</td>
 						<td>
 							<form
-								action="${ pageContext.request.contextPath }/admin/users/delete/${user.id}"
+								action="${ pageContext.request.contextPath }/admin/product/delete/${product.id}"
 								method="POST">
 								<button class="btn btn-danger">Delete</button>
 							</form>
@@ -96,7 +97,7 @@
 				<c:forEach begin="0" end="${ pageData.totalPages - 1 }"
 					varStatus="page">
 					<li class="page-item"><a
-						href="${ pageContext.request.contextPath }/admin/users/?page=${page.index}"
+						href="${ pageContext.request.contextPath }/admin/products/?page=${page.index}"
 						class="page-link">${ page.index + 1 } </a></li>
 				</c:forEach>
 			</ul>

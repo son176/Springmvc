@@ -3,6 +3,8 @@ package com.shop.utils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Service;
+@Service
 public class SessionUtils {
 	 public static void addSession(HttpServletRequest request,String name,Object value) {
 			HttpSession session=request.getSession();

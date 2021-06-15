@@ -12,16 +12,14 @@
 <body>
 	<div class="col-10 offset-1 mt-5 border border-primary p-2">
 		<form method="GET"
-			action="${ pageContext.request.contextPath }/admin/users">
+			action="${ pageContext.request.contextPath }/admin/categories">
 			<div class="row col-12 mt-2">
 				<div class="col-6">
 					<label>Sắp xếp theo</label> <select name="sort_by"
 						class="form-control">
 						<option value="id">Mặc định</option>
-						<option value="username">Họ Tên</option>
-						<option value="email">Email</option>
-						<option value="admin">Tài khoản</option>
-						<option value="activated">Trạng thái</option>
+						<option value="name">Tên</option>
+						
 					</select>
 				</div>
 				<div class="col-6">
@@ -35,7 +33,7 @@
 
 			<div>
 				<button class="btn btn-primary mt-4">Lọc</button>
-				<a href="${ pageContext.request.contextPath }/admin/users"
+				<a href="${ pageContext.request.contextPath }/admin/categories"
 					class="btn btn-danger mt-4" type="reset"> Reset </a>
 			</div>
 		</form>
@@ -54,34 +52,28 @@
 		</c:if>
 		<div class="">
 			<a class="btn btn-success col-1"
-				href="${ pageContext.request.contextPath }/admin/users/create">Create</a>
+				href="${ pageContext.request.contextPath }/admin/categories/create">Create</a>
 		</div>
 		<table class="table table-strip table-dark mt-3">
 			<thead>
 				<tr>
 					<td>Id</td>
-					<td>Username</td>
-					<td>Email</td>
-					<td>Tài khoản</td>
-					<td>Trạng thái</td>
-					<td colspan="2">Thao tác</td>
+					<td>Name</td>	
+					<td colspan="4">Thao tác</td>
 				</tr>
 			</thead>
 
 			<tbody>
-				<c:forEach items="${ pageData.content }" var="user">
+				<c:forEach items="${ pageData.content }" var="category">
 					<tr>
-						<td>${ user.id }</td>
-						<td>${ user.username }</td>
-						<td>${ user.email }</td>
-						<td>${ user.admin == 1 ? "Admin" : "User" }</td>
-						<td>${ user.activated == 1 ? "Đang hoạt động" : "Vô hiệu hóa" }</td>
+						<td>${ category.id }</td>
+						<td>${ category.name }</td>
 						<td><a class="btn btn-primary"
-							href="${ pageContext.request.contextPath }/admin/users/edit/${user.id}">Update</a>
+							href="${ pageContext.request.contextPath }/admin/categories/edit/${category.id}">Update</a>
 						</td>
 						<td>
 							<form
-								action="${ pageContext.request.contextPath }/admin/users/delete/${user.id}"
+								action="${ pageContext.request.contextPath }/admin/categories/delete/${category.id}"
 								method="POST">
 								<button class="btn btn-danger">Delete</button>
 							</form>
@@ -96,7 +88,7 @@
 				<c:forEach begin="0" end="${ pageData.totalPages - 1 }"
 					varStatus="page">
 					<li class="page-item"><a
-						href="${ pageContext.request.contextPath }/admin/users/?page=${page.index}"
+						href="${ pageContext.request.contextPath }/admin/categories/?page=${page.index}"
 						class="page-link">${ page.index + 1 } </a></li>
 				</c:forEach>
 			</ul>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,11 +24,12 @@
 				<label for="email">Email</label>
 				<form:input path="email" class="form-control" autocomplete="off" />
 				<form:errors path="email" element="span" cssClass="text-danger" />
+				<c:if test="${ not empty sessionScope.error }">
+					<div class="alert alert-danger">${ sessionScope.error }</div>
+					<c:remove var="error" scope="session" />
+				</c:if>
 			</div>
-			<c:if test="${ not empty sessionScope.error }">
-			<div class="alert alert-danger">${ sessionScope.error }</div>
-			<c:remove var="error" scope="session"/>
-		   </c:if>
+
 			<div class="form-group mt-3">
 				<label for="password">Password</label>
 				<form:password path="password" name="password" class="form-control" />
@@ -46,6 +47,7 @@
 				<label for="photo">Image</label> <input type="file"
 					class="form-control" name="upload_file">
 			</div>
+			<form:errors path="photo" element="span" cssClass="text-danger" />
 			<div class="form-group mt-3">
 				<label for="status">Trạng thái</label>
 				<form:select path="activated" id="activated" class="form-control">
@@ -56,7 +58,7 @@
 			</div>
 			<div class="form-group mt-3">
 				<button class="btn btn-primary">Submit</button>
-				<a href="${ pageContext.request.contextPath }/admin/users/create" type="reset" class="btn btn-danger">Clear</a >
+				<form:button type="reset" class="btn btn-danger">Clear</form:button>
 			</div>
 		</form:form>
 	</div>

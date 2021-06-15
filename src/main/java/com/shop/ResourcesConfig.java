@@ -10,7 +10,9 @@ public class ResourcesConfig {
 	public  MessageSource getMessageSource() {
 		ReloadableResourceBundleMessageSource ms =
 				new ReloadableResourceBundleMessageSource();
-		ms.setBasenames("classpath:messages/user");
+		ms.addBasenames("classpath:messages/user");
+		ms.addBasenames("classpath:messages/product");
+		ms.addBasenames("classpath:messages/category");
 		ms.setDefaultEncoding("UTF-8");
 		return ms;
 	}
