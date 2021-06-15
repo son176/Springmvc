@@ -10,20 +10,14 @@
 <body>
 	<nav class="row">
 		<nav class="col navbar navbar-expand-sm navbar-light bg-light">
-			<a class="navbar-brand col-5 mr-5" href=""> <i
+			<a class="navbar-brand col-5 mr-5" href="${ pageContext.request.contextPath }/home"> <i
 				class="fa fa-home" aria-hidden="true"></i>Home
 			</a>
 			<div class="collapse navbar-collapse col-6" id="collapsibleNavId">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item"><a class="nav-link"
-						href="${ pageContext.request.contextPath }/admin/users"><i class="fa fa-user"
-							aria-hidden="true"></i> User</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="${ pageContext.request.contextPath }/admin/categories"><i class="fa fa-comment"
-							aria-hidden="true"></i>Category</a></li>
-							<li class="nav-item"><a class="nav-link"
-						href="${ pageContext.request.contextPath }/admin/product"><i class="fa fa-comment"
-							aria-hidden="true"></i>Product</a></li>
+						href=""><i class="fa fa-user"
+							aria-hidden="true"></i> Order</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdownId"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,7 +32,7 @@
 								<a class="dropdown-item" href="">Register</a>
 							</c:if>
 							<c:if test="${isLogin}">
-								<a class="dropdown-item" href="">Logoff</a>
+								<a class="dropdown-item" href="${ pageContext.request.contextPath }/logout">Logoff</a>
 								<a class="dropdown-item" href="">Change
 									Password</a>
 							</c:if>
