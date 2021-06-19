@@ -28,6 +28,7 @@ import com.shop.entity.Product;
 import com.shop.mapper.ProductMapper;
 import com.shop.repositories.CategoryRepository;
 import com.shop.repositories.ProductRepository;
+import com.shop.utils.DateFormat;
 
 @Controller
 @RequestMapping(value = "/admin/product")
@@ -42,11 +43,20 @@ public class ProductControler {
 	private ProductMapper mapper;
 	@Autowired
 	private CategoryRepository categoryRepo;
+	@Autowired
+	private DateFormat dateformat;
 
 	@ModelAttribute("listCate")
 	public List<Category> getCategory() {
 		List<Category> list = categoryRepo.findAll();
 		return list;
+	}
+	
+	@ModelAttribute("getNow")
+	public String getNow() {
+		Date now = new Date();
+		String dateStr = dateformat.toString(now, "yyyy-MM-dd");
+		return dateStr;
 	}
 
 	@GetMapping()
@@ -82,13 +92,9 @@ public class ProductControler {
 			return "admin/product/create";
 		} else {
 			Product entity = this.mapper.convertToEntity(product);
-			Date today = new Date();
-			java.sql.Date todaysql = new java.sql.Date(today.getTime());
-			entity.setCreate_date(todaysql);
 			session = request.getSession();
 			session.setAttribute("sucessfully", "Thêm thành công");
 			this.productRepo.save(entity);
-
 			return "redirect:/admin/product";
 		}
 	}
@@ -109,7 +115,6 @@ public class ProductControler {
 			return "admin/product/edit";
 		} else {
 			Product entity = this.mapper.convertToEntity(product);
-
 			session.setAttribute("sucessfully", "Sửa thành công");
 			this.productRepo.save(entity);
 			return "redirect:/admin/product";
@@ -117,7 +122,7 @@ public class ProductControler {
 
 	}
 
-	@PostMapping(value = "/delete/{id}")
+	@RequestMapping(value = "/delete/{id}")
 	public String delete(@PathVariable("id") Integer id) {
 		session = request.getSession();
 		session.setAttribute("status", "Xóa thành công");

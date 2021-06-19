@@ -8,6 +8,9 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <link rel="stylesheet"
 	href="${ pageContext.request.contextPath }/css/bootstrap.min.css"></link>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="col-10 offset-1 mt-5 border border-primary p-2">
@@ -72,11 +75,30 @@
 							href="${ pageContext.request.contextPath }/admin/categories/edit/${category.id}">Update</a>
 						</td>
 						<td>
-							<form
-								action="${ pageContext.request.contextPath }/admin/categories/delete/${category.id}"
-								method="POST">
-								<button class="btn btn-danger">Delete</button>
-							</form>
+								<!-- Button trigger modal -->
+							<a type="button" class="btn btn-danger"
+								data-bs-toggle="modal" data-bs-target="#exampleModal${category.id}">
+								Delete</a> <!-- Modal -->
+							<div class="modal fade" id="exampleModal${category.id}" tabindex="-1"
+								aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title text-dark" id="exampleModalLabel">Bạn muốn xóa không
+												</h5>
+											<button type="button" class="btn-close"
+												data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body text-dark">Bạn muốn xóa chứ</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-bs-dismiss="modal">Close</button>
+											<a type="button" class="btn btn-danger"  href="${ pageContext.request.contextPath }/admin/categories/delete/${category.id}">Delete
+												</a>
+										</div>
+									</div>
+								</div>
+							</div>
 						</td>
 					</tr>
 				</c:forEach>

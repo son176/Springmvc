@@ -2,8 +2,9 @@ package com.shop.entity;
 
 
 
-import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -36,9 +38,9 @@ public class Product {
 	@Column(name = "image")
 	private String image;
 	@Column(name = "price")
-	private Integer price;
+	private Double price;
 	@Column(name = "create_date")
-	private Date create_date;
+	private String create_date;
 	@Column(name = "avaliable")
 	private Integer avaliable;
 //	private Integer category_id;
@@ -48,4 +50,6 @@ public class Product {
 			)
 	private Category category;
 	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<OrderDetail> order_details;
 }

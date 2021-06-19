@@ -1,6 +1,6 @@
 package com.shop.entity;
 
-import java.sql.Date;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter

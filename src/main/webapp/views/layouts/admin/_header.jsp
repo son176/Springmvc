@@ -6,7 +6,6 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet"
 	href="${ pageContext.request.contextPath }/css/bootstrap.min.css"></link>
-<title>Insert title here</title>
 </head>
 <body>
 	<header >

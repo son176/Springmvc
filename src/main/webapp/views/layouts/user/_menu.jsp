@@ -15,9 +15,7 @@
 			</a>
 			<div class="collapse navbar-collapse col-6" id="collapsibleNavId">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item"><a class="nav-link"
-						href=""><i class="fa fa-user"
-							aria-hidden="true"></i> Order</a></li>
+					<li class="nav-item"><a class="nav-link " aria-current="page" href="${ pageContext.request.contextPath }/user/cart">Cart</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="dropdownId"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,7 +24,7 @@
 						<div class="dropdown-menu" aria-labelledby="dropdownId">
 							<a class="dropdown-item" href="">${user.username}</a>
 							<c:if test="${!isLogin}">
-								<a class="dropdown-item" href="">Login</a>
+								<a class="dropdown-item" href="${ pageContext.request.contextPath }/login">Login</a>
 								<a class="dropdown-item" href="">Forgot
 									Password</a>
 								<a class="dropdown-item" href="">Register</a>

@@ -40,9 +40,8 @@
 
 		<div class="row p-2">
 			<c:forEach var="item" items="${pageData.content}">
-				<div class="col-3 mt-2">
+				<div class="col-3 mt-4">
 					<div class="card text-center">
-
 						<div class="card-body" style="height:230px;">
 							<img src="${item.image}" style="height:150px;" alt="" class="img-fluid">
 							<div class="row border-top mt-2">
@@ -51,13 +50,13 @@
 							<b class="text-danger">Giá: ${item.price} VND</b>
 						</div>
 						<div class="card-footer">
-							<a href="" class="btn btn-danger">Mua</a>
+							<a href="${ pageContext.request.contextPath }/user/order?id=${ item.id }" class="btn btn-danger">Add to Cart</a>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-		<div class="col">
+		<div class="d-flex justify-content-center">
 			<ul class="pagination">
 				<c:forEach begin="0" end="${ pageData.totalPages - 1 }"
 					varStatus="page">

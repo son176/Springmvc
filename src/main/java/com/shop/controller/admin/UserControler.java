@@ -147,7 +147,7 @@ public class UserControler {
 
 	}
 
-	@PostMapping(value = "/delete/{id}")
+	@RequestMapping(value = "/delete/{id}")
 	public String delete(@PathVariable("id") Integer id) {
 		session = request.getSession();
 		session.setAttribute("status", "xóa thành công");

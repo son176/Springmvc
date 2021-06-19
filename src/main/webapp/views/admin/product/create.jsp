@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +11,9 @@
 	href="${ pageContext.request.contextPath }/css/bootstrap.min.css"></link>
 </head>
 <body>
-	
+
 	<div class="mt-5 col-10 offset-1">
-		<form:form 
-			modelAttribute="product" 
-			method="POST"
+		<form:form modelAttribute="product" method="POST"
 			enctype="multipart/form-data"
 			action="${ pageContext.request.contextPath }/admin/product/store">
 			<div class="form-group mt-3">
@@ -28,11 +26,18 @@
 				<form:input path="image" class="form-control" autocomplete="off" />
 				<form:errors path="image" element="span" cssClass="text-danger" />
 			</div>
-		   
+
 			<div class="form-group mt-3">
 				<label for="price">Giá</label>
 				<form:input path="price" name="price" class="form-control" />
 				<form:errors path="price" element="span" cssClass="text-danger" />
+			</div>
+			<div class="form-group mt-3">
+				<label for="create_date">Create date</label>
+				<form:input path="create_date" name="create_date"
+					class="form-control" readonly="true" value="${ getNow }" />
+				<form:errors path="create_date" element="span"
+					cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
 				<label for="avaliable">Trạng thái</label>
@@ -45,14 +50,15 @@
 			<div class="form-group mt-3">
 				<label for="status">Category</label>
 				<form:select path="category" id="category" class="form-control">
-					<c:forEach items="${listCate}" var="category">					
-					<form:option value="${category.id }">${category.name}</form:option>
+					<c:forEach items="${listCate}" var="category">
+						<form:option value="${category.id }">${category.name}</form:option>
 					</c:forEach>
 				</form:select>
 			</div>
 			<div class="form-group mt-3">
 				<button class="btn btn-primary">Submit</button>
-				<a href="${ pageContext.request.contextPath }/admin/product/create" type="reset" class="btn btn-danger">Clear</a >
+				<a href="${ pageContext.request.contextPath }/admin/product/create"
+					type="reset" class="btn btn-danger">Clear</a>
 			</div>
 		</form:form>
 	</div>

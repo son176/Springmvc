@@ -1,4 +1,4 @@
-package com.shop.controller.user;
+package com.shop.controller.auth;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,13 +7,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.shop.dto.UserDTO;
 import com.shop.entity.User;
 import com.shop.repositories.UserRepositori;
 import com.shop.utils.CookieUtils;
 import com.shop.utils.HashUtil;
+import com.shop.utils.LoginUtils;
 
 @Controller
 public class Logincontroler {
@@ -25,7 +28,13 @@ public class Logincontroler {
 	@Autowired
 	private HttpServletResponse response;
 	@GetMapping("/login")
-	public String getLoginForm() {
+	public String getLoginForm(@ModelAttribute("user") UserDTO user) {
+		if(LoginUtils.getRole(request) == "admin") {
+			return "redirect:/admin/user";
+		}
+		if(LoginUtils.getRole(request) == "user") {
+			return "redirect:/home";
+		}
 		return "/auth/login";
 	}
 	
@@ -39,6 +48,10 @@ public class Logincontroler {
 		HttpSession session = request.getSession();
 		if (entity == null) {
 			session.setAttribute("error", "Sai email hoặc mật khẩu");
+			return "redirect:/login";
+		}
+		if( entity.getActivated() == 0) {
+			session.setAttribute("error", "Tài khoản bị khóa liên hệ 0392567806");
 			return "redirect:/login";
 		}
 
@@ -55,6 +68,9 @@ public class Logincontroler {
         }
 		session.setAttribute("isLogin", true);
 		session.setAttribute("user", entity);
-		return "redirect:/admin/users";
+		if(entity.getAdmin() == 1) {
+			return "redirect:/admin/users";
+		}
+		return "redirect:/home";
 	}
 }

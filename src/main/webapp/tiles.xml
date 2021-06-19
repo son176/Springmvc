@@ -19,8 +19,8 @@
      <put-attribute name = "content" value = ""/> 
      <put-attribute name = "footer" value = "/views/layouts/user/_footer.jsp"/> 
 </definition > 
-<definition name="auth/*" extends = "web.user" > 
-<put-attribute name="content" value="/views/auth/{1}.jsp"/> 
+<definition name="user/*" extends = "web.user" > 
+<put-attribute name="content" value="/views/user/{1}.jsp"/> 
 </definition >
 
 

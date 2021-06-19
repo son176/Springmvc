@@ -1,4 +1,4 @@
-package com.shop.controller.user;
+package com.shop.controller.auth;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +21,7 @@ public class LogoutControler {
 		request.getSession().removeAttribute("user");
 		CookieUtils.addCookie("email", null, 0, response);
 		request.getSession().setAttribute("isLogin", false);
+		request.getSession().removeAttribute("listOrderDetails");
 		return "redirect:/login";
 	}
 }

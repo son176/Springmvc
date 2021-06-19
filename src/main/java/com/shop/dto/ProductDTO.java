@@ -1,7 +1,5 @@
 package com.shop.dto;
 
-import java.util.Date;
-
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -28,9 +26,9 @@ public class ProductDTO {
 	private String image;
 	@NotNull
 	@Min(0)
-	private Integer price;
+	private Double price;
 
-	private Date create_date;
+	private String create_date;
 	
 	private Integer avaliable;
 

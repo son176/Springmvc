@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<title>Online Shop</title>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <link rel="stylesheet"
 	href="${ pageContext.request.contextPath }/css/bootstrap.min.css"></link>
